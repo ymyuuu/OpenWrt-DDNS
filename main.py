@@ -25,6 +25,7 @@ def run_command_from_config():
         extract_top_ips()
     else:
         print("未找到配置文件，请先配置参数。")
+        return False  # 增加返回值以便停止下面的执行
 
 def extract_top_ips():
     if os.path.exists(result_file):
@@ -46,6 +47,7 @@ def extract_top_ips():
         print("需要推送的 IP 已保存到push-ip.txt。")
     else:
         print("未找到 result.csv 文件，请确保命令执行成功并生成该文件.")
+        return False  # 增加返回值以便停止下面的执行
 
 def configure_dns_records():
     # 从 'cf-dns.json' 获取DNS配置
@@ -84,10 +86,12 @@ def configure_dns_records():
                     delete_url = f"{base_url}/{record['id']}"
                     response = requests.delete(delete_url, headers=headers)
                     if response.status_code != 200:
-                        raise Exception(f"删除'A'记录时出错，HTTP响应代码：{response.status_code}")
+                        print(f"删除'A'记录时出错，HTTP响应代码：{response.status_code}")
+                        return False  # 增加返回值以便停止下面的执行
             print("已删除所有DNS 'A'记录")
         else:
-            raise Exception(f"无法获取DNS记录信息。响应代码: {response.status_code}")
+            print(f"无法获取DNS记录信息。响应代码: {response.status_code}")
+            return False  # 增加返回值以便停止下面的执行
 
         # 创建新的'A'记录
         for ip in ip_addresses:
@@ -106,10 +110,9 @@ def configure_dns_records():
                 print(f"成功创建 (IPv4) DNS记录，IP地址: {ip}")
             else:
                 print("创建DNS记录时出错")
-                raise Exception(f"创建DNS记录时出错，HTTP响应代码：{response.status_code}")
-    else:
-        print("未配置DNS参数 cf-dns.json 。")
+                return False  # 增加返回值以便停止下面的执行
 
 if __name__ == "__main__":
-    run_command_from_config()
-    configure_dns_records()
+    if run_command_from_config():
+        if extract_top_ips():
+            configure_dns_records()
