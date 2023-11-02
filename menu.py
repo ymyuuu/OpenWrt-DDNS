@@ -12,7 +12,7 @@ dns_file = os.path.join(script_directory, "cf-dns.json")
 
 def configure_parameters():
     # 询问其他参数
-    n = input("\n\n开始了哦\n\n延迟测速线程 (-n, 默认 200): ") or "200"
+    n = input("先配置点参数，你别急\n\n延迟测速线程 (-n, 默认 200): ") or "200"
     t = input("延迟测速次数 (-t, 默认 4): ") or "4"
     tp = input("测速端口 (-tp, 默认 80): ") or "80"
     tl = input("平均延迟上限 (-tl, 默认 200 ms): ") or "200"
