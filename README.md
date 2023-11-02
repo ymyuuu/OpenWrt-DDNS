@@ -1,6 +1,6 @@
 # OpenWrt DDNS 安装指南
 
-本指南将介绍如何在 OpenWrt 上安装和配置 DDNS（动态域名解析）服务。
+本指南将介绍如何在 OpenWrt 上安装和配置 优选IP（或自定义IP）DDNS（动态域名解析）服务。
 
 ## 依赖
 
@@ -60,6 +60,27 @@ cd /Mingyu && python3 update.py && python3 main.py
 
 这将使 OpenWrt 每小时执行一次 `/Mingyu` 目录下的 `update.py` 和 `main.py` 脚本。
 
+## 自定义测速 IP
+
+如果您需要自定义测速 IP，请按照以下步骤进行操作：
+
+1. 打开 `/Mingyu` 目录。
+2. 找到名为 `ip.txt` 的文件。
+3. 使用文本编辑器打开 `ip.txt` 文件。
+4. 在文件中输入您想要使用的测速 IP 地址。
+5. 保存并关闭 `ip.txt` 文件。
+
+请确保您输入的测速 IP 地址格式正确，并且每个 IP 地址占据一行。
+
+在自定义测速 IP 完成后，您必须执行以下命令来运行自定义测速 IP 的 OpenWrt DDNS：
+
+```shell
+cd /Mingyu && python3 main.py
+```
+
+上述命令将切换到 `/Mingyu` 目录，并运行 `main.py` 脚本。
+
+OpenWrt DDNS 将使用您在 `ip.txt` 文件中指定的测速 IP 地址来进行测速和更新。
 
 ## 免责声明
 
