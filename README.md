@@ -16,16 +16,16 @@ opkg install wget unzip python3
 执行以下命令以安装 OpenWrt DDNS：
 
 ```shell
-mkdir -p /openwrt-ddns \
-&& rm -rf /openwrt-ddns/* \
-&& wget -O /openwrt-ddns/openwrt-ddns.zip https://ymy.gay/https://github.com/ymyuuu/OpenWrt-DDNS/archive/refs/heads/main.zip \
-&& unzip /openwrt-ddns/openwrt-ddns.zip -d /openwrt-ddns \
-&& mv /openwrt-ddns/openwrt-ddns-main/* /openwrt-ddns/ \
-&& rm -rf /openwrt-ddns/openwrt-ddns-main \
-&& rm /openwrt-ddns/openwrt-ddns.zip \
-&& cd /openwrt-ddns \
-&& python3 update.py \
-&& python3 menu.py
+mkdir -p /openwrt-ddns &&
+rm -rf /openwrt-ddns/* &&
+wget -O /openwrt-ddns/openwrt-ddns.zip https://ymy.gay/https://github.com/ymyuuu/openwrt-ddns/archive/refs/heads/main.zip &&
+unzip /openwrt-ddns/openwrt-ddns.zip -d /openwrt-ddns &&
+mv /openwrt-ddns/openwrt-ddns-main/* /openwrt-ddns/ &&
+rm -rf /openwrt-ddns/openwrt-ddns-main &&
+rm /openwrt-ddns/openwrt-ddns.zip &&
+cd /openwrt-ddns &&
+python3 update.py &&
+python3 menu.py
 ```
 
 上述命令将执行以下操作：
