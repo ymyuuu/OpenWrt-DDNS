@@ -20,7 +20,7 @@ mkdir -p /openwrt-ddns &&
 rm -rf /openwrt-ddns/* &&
 wget -O /openwrt-ddns/openwrt-ddns.zip https://ymy.gay/https://github.com/ymyuuu/openwrt-ddns/archive/refs/heads/main.zip &&
 unzip /openwrt-ddns/openwrt-ddns.zip -d /openwrt-ddns &&
-mv /openwrt-ddns/openwrt-ddns-main/* /openwrt-ddns/ &&
+mv /openwrt-ddns/OpenWrt-DDNS-main/* /openwrt-ddns/ &&
 rm -rf /openwrt-ddns/openwrt-ddns-main &&
 rm /openwrt-ddns/openwrt-ddns.zip &&
 cd /openwrt-ddns &&
