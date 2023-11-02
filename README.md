@@ -61,7 +61,6 @@ cd /OpenWrt-DDNS && python3 update.py && python3 main.py
 
 ```
 0 * * * * cd /OpenWrt-DDNS && python3 update.py && python3 main.py
-
 ```
 
 这将使 OpenWrt 每小时执行一次 `/OpenWrt-DDNS` 目录下的 `update.py` 和 `main.py` 脚本。
