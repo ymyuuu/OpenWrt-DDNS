@@ -44,10 +44,10 @@ mkdir -p /openwrt-ddns \
 
 ## 后续操作
 
-在安装完成后，如果需要运行 OpenWrt DDNS，可以执行以下命令：
+在安装完成后，如果后续需要运行 OpenWrt DDNS，可以直接执行以下命令：
 
 ```shell
-cd /Mingyu && python3 ip.py && python3 main.py
+cd /Mingyu && python3 update.py && python3 main.py
 ```
 
 上述命令将切换到 `/Mingyu` 目录，并依次运行 `update.py` 和 `main.py` 脚本。
