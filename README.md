@@ -9,6 +9,7 @@
 ```shell
 opkg update
 opkg install wget unzip python3
+
 ```
 
 ## 安装步骤
@@ -51,6 +52,7 @@ python3 menu.py
 
 ```shell
 cd /OpenWrt-DDNS && python3 update.py && python3 main.py
+
 ```
 
 上述命令将切换到 `/OpenWrt-DDNS` 目录，并依次运行 `update.py` 和 `main.py` 脚本。
@@ -59,6 +61,7 @@ cd /OpenWrt-DDNS && python3 update.py && python3 main.py
 
 ```
 0 * * * * cd /OpenWrt-DDNS && python3 update.py && python3 main.py
+
 ```
 
 这将使 OpenWrt 每小时执行一次 `/OpenWrt-DDNS` 目录下的 `update.py` 和 `main.py` 脚本。
@@ -79,6 +82,7 @@ cd /OpenWrt-DDNS && python3 update.py && python3 main.py
 
 ```shell
 cd /OpenWrt-DDNS && python3 main.py
+
 ```
 
 上述命令将切换到 `/OpenWrt-DDNS` 目录，并运行 `main.py` 脚本。
