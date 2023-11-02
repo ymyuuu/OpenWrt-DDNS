@@ -70,9 +70,9 @@ cd /Mingyu && python3 update.py && python3 main.py
 4. 在文件中输入您想要使用的测速 IP 地址。
 5. 保存并关闭 `ip.txt` 文件。
 
-请确保您输入的测速 IP 地址格式正确，并且每个 IP 地址占据一行。
+**请确保您输入的测速 IP 地址格式正确，并且每个 IP 地址占据一行。**
 
-在自定义测速 IP 完成后，您必须执行以下命令来运行自定义测速 IP 的 OpenWrt DDNS：
+**在编辑自定义测速 IP 列表完成后，您必须执行以下命令来运行自定义测速 IP 列表的 OpenWrt DDNS：**
 
 ```shell
 cd /Mingyu && python3 main.py
