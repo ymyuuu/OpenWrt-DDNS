@@ -1,6 +1,6 @@
 # OpenWrt DDNS 安装指南
 
-本指南将介绍如何在 OpenWrt 上安装和配置 优选IP（或自定义IP）DDNS（动态域名解析）服务。
+本指南将介绍如何在 OpenWrt 上安装和配置优选反代IP或自定义测速 IP 的 DDNS（动态域名解析）服务。
 
 ## 依赖
 
