@@ -43,7 +43,7 @@ def extract_top_ips():
         with open(ip_result_file, "w") as top_ips_file:
             top_ips_file.write("\n".join(ips))
 
-        print("需要推送的 IP 已保存到push-ip.txt。")
+        print("\n需要推送的 IP 已保存到push-ip.txt。")
     else:
         print("未找到 result.csv 文件，请确保命令执行成功并生成该文件.")
 
