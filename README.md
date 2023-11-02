@@ -16,25 +16,27 @@ opkg install wget unzip python3
 执行以下命令以安装 OpenWrt DDNS：
 
 ```shell
-mkdir -p /openwrt-ddns &&
-rm -rf /openwrt-ddns/* &&
-wget -O /openwrt-ddns/openwrt-ddns.zip https://ymy.gay/https://github.com/ymyuuu/openwrt-ddns/archive/refs/heads/main.zip &&
-unzip /openwrt-ddns/openwrt-ddns.zip -d /openwrt-ddns &&
-mv /openwrt-ddns/OpenWrt-DDNS-main/* /openwrt-ddns/ &&
-rm -rf /openwrt-ddns/openwrt-ddns-main &&
-rm /openwrt-ddns/openwrt-ddns.zip &&
-cd /openwrt-ddns &&
+mkdir -p /OpenWrt-DDNS &&
+rm -rf /OpenWrt-DDNS/* &&
+wget -O /OpenWrt-DDNS/OpenWrt-DDNS.zip https://github.com/ymyuuu/openwrt-ddns/archive/refs/heads/main.zip &&
+unzip /OpenWrt-DDNS/OpenWrt-DDNS.zip -d /OpenWrt-DDNS &&
+mv /OpenWrt-DDNS/OpenWrt-DDNS-main/* /OpenWrt-DDNS/ &&
+rm -rf /OpenWrt-DDNS/OpenWrt-DDNS-main &&
+rm /OpenWrt-DDNS/OpenWrt-DDNS.zip &&
+rm /OpenWrt-DDNS/README.md &&
+rm /OpenWrt-DDNS/LICENSE &&
+cd /OpenWrt-DDNS &&
 python3 update.py &&
 python3 menu.py
 ```
 
 上述命令将执行以下操作：
 
-1. 创建 `/openwrt-ddns` 目录（如果不存在）。
-2. 清空 `/openwrt-ddns` 目录下的所有内容。
-3. 使用 `wget` 下载 OpenWrt DDNS 源代码压缩包，并将其保存为 `/openwrt-ddns/openwrt-ddns.zip`。
-4. 使用 `unzip` 解压缩源代码压缩包到 `/openwrt-ddns` 目录。
-5. 将解压缩后的文件移动到 `/openwrt-ddns` 目录。
+1. 创建 `/OpenWrt-DDNS` 目录（如果不存在）。
+2. 清空 `/OpenWrt-DDNS` 目录下的所有内容。
+3. 使用 `wget` 下载 OpenWrt DDNS 源代码压缩包，并将其保存为 `/OpenWrt-DDNS/openwrt-ddns.zip`。
+4. 使用 `unzip` 解压缩源代码压缩包到 `/OpenWrt-DDNS` 目录。
+5. 将解压缩后的文件移动到 `/OpenWrt-DDNS` 目录。
 6. 删除不再需要的文件和目录。
 7. 切换到 `/openwrt-ddns` 目录。
 8. 使用 `python3` 运行 `update.py` 脚本以更新配置。
@@ -47,24 +49,24 @@ python3 menu.py
 在安装完成后，如果后续需要运行 OpenWrt DDNS，可以直接执行以下命令：
 
 ```shell
-cd /Mingyu && python3 update.py && python3 main.py
+cd /OpenWrt-DDNS && python3 update.py && python3 main.py
 ```
 
-上述命令将切换到 `/Mingyu` 目录，并依次运行 `update.py` 和 `main.py` 脚本。
+上述命令将切换到 `/OpenWrt-DDNS` 目录，并依次运行 `update.py` 和 `main.py` 脚本。
 
 如果需要定时运行 OpenWrt DDNS，可以将以下内容添加到 OpenWrt 的计划任务中：
 
 ```
-0 * * * * cd /Mingyu && python3 update.py && python3 main.py
+0 * * * * cd /OpenWrt-DDNS && python3 update.py && python3 main.py
 ```
 
-这将使 OpenWrt 每小时执行一次 `/Mingyu` 目录下的 `update.py` 和 `main.py` 脚本。
+这将使 OpenWrt 每小时执行一次 `/OpenWrt-DDNS` 目录下的 `update.py` 和 `main.py` 脚本。
 
 ## 自定义测速 IP
 
 如果您需要自定义测速 IP，请按照以下步骤进行操作：
 
-1. 打开 `/Mingyu` 目录。
+1. 打开 `/OpenWrt-DDNS` 目录。
 2. 找到名为 `ip.txt` 的文件。
 3. 使用文本编辑器打开 `ip.txt` 文件。
 4. 在文件中输入您想要使用的测速 IP 地址。
@@ -75,10 +77,10 @@ cd /Mingyu && python3 update.py && python3 main.py
 **在编辑自定义测速 IP 列表完成后，您必须执行以下命令来运行自定义测速 IP 列表的 OpenWrt DDNS：**
 
 ```shell
-cd /Mingyu && python3 main.py
+cd /OpenWrt-DDNS && python3 main.py
 ```
 
-上述命令将切换到 `/Mingyu` 目录，并运行 `main.py` 脚本。
+上述命令将切换到 `/OpenWrt-DDNS` 目录，并运行 `main.py` 脚本。
 
 OpenWrt DDNS 将使用您在 `ip.txt` 文件中指定的测速 IP 地址来进行测速和更新。
 
