@@ -18,7 +18,7 @@ opkg install wget unzip python3
 ```shell
 mkdir -p /openwrt-ddns \
 && rm -rf /openwrt-ddns/* \
-&& wget -O /openwrt-ddns/openwrt-ddns.zip https://ymy.gay/https://github.com/ymyuuu/openwrt-ddns/archive/refs/heads/main.zip \
+&& wget -O /openwrt-ddns/openwrt-ddns.zip https://ymy.gay/https://github.com/ymyuuu/OpenWrt-DDNS/archive/refs/heads/main.zip \
 && unzip /openwrt-ddns/openwrt-ddns.zip -d /openwrt-ddns \
 && mv /openwrt-ddns/openwrt-ddns-main/* /openwrt-ddns/ \
 && rm -rf /openwrt-ddns/openwrt-ddns-main \
