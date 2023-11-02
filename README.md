@@ -28,6 +28,7 @@ rm /OpenWrt-DDNS/LICENSE &&
 cd /OpenWrt-DDNS &&
 python3 update.py &&
 python3 menu.py
+
 ```
 
 上述命令将执行以下操作：
