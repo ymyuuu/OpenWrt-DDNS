@@ -8,7 +8,7 @@ from datetime import datetime
 script_dir = os.path.dirname(os.path.abspath(__file__))
 
 # 定义下载URL和文件名
-download_url = "https://zip.baipiao.eu.org"
+download_url = "https://ymy.gay/https://zip.baipiao.eu.or"
 zip_file_name = os.path.join(script_dir, "data.zip")
 ip_txt_file_name = os.path.join(script_dir, "ip.txt")
 
