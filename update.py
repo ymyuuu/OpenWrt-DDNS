@@ -8,7 +8,7 @@ from datetime import datetime
 script_dir = os.path.dirname(os.path.abspath(__file__))
 
 # 定义下载URL和文件名
-download_url = "https://ymy.gay/https://zip.baipiao.eu.or"
+download_url = "https://ymy.gay/https://zip.baipiao.eu.org"
 zip_file_name = os.path.join(script_dir, "data.zip")
 ip_txt_file_name = os.path.join(script_dir, "ip.txt")
 
@@ -81,7 +81,7 @@ except Exception as e:
 # 输出更新信息
 end_time = datetime.now()
 start_time_str = start_time.strftime('%Y-%m-%d %H:%M')
-if not is_first_run:  # 只在不是第一次运行时输出变化信息
+if response and not is_first_run:  # 只在不是第一次运行且没有下载错误时输出变化信息
     if added_ips or removed_ips:
         if added_ips:
             print("+")
@@ -95,10 +95,12 @@ if not is_first_run:  # 只在不是第一次运行时输出变化信息
         print(f"本次更新之后共有 {count} 个IP\n")
     else:
         count = len(ip_set)
-        print(f"IP库已是最新，共有 {count} 个IP\n")
-else:
+        print(f"IP库更新完成，无变化，共有 {count} 个IP\n")
+elif response and is_first_run:  # 只在不是第一次运行且没有下载错误时输出首次运行信息
     count = len(ip_set)
     print(f"首次运行，已下载最新IP库，共有 {count} 个IP\n")
+elif not response:
+    print("由于下载ZIP文件时出现错误，无法进行IP库更新。\n")
 
 # 清理临时文件
 try:
