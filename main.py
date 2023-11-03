@@ -84,10 +84,12 @@ def configure_dns_records():
                     delete_url = f"{base_url}/{record['id']}"
                     response = requests.delete(delete_url, headers=headers)
                     if response.status_code != 200:
-                        raise Exception(f"删除'A'记录时出错，HTTP响应代码：{response.status_code}")
+                        print(f"删除'A'记录时出错，HTTP响应代码：{response.status_code}")
+                        return
             print("已删除所有DNS 'A'记录")
         else:
-            raise Exception(f"无法获取DNS记录信息。响应代码: {response.status_code}")
+            print(f"无法获取DNS记录信息。响应代码: {response.status_code}")
+            return
 
         # 创建新的'A'记录
         for ip in ip_addresses:
@@ -106,10 +108,11 @@ def configure_dns_records():
                 print(f"成功创建 (IPv4) DNS记录，IP地址: {ip}")
             else:
                 print("创建DNS记录时出错")
-                raise Exception(f"创建DNS记录时出错，HTTP响应代码：{response.status_code}")
+                print(f"创建DNS记录时出错，HTTP响应代码：{response.status_code}")
+                return
     else:
         print("未配置DNS参数 cf-dns.json 。")
 
-if __name__ == "__main__":
+if __name__ == "__main":
     run_command_from_config()
     configure_dns_records()
