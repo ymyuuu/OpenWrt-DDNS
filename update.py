@@ -73,11 +73,14 @@ if not is_first_run:  # 只在不是第一次运行时输出变化信息
             print("-")
             for ip in sorted(removed_ips, key=lambda x: [int(part) for part in x.split('.')]):
                 print(ip)
-        print(f"本次更新之后共有 {len(ip_set)} 个IP\n")
+        count = len(ip_set)
+        print(f"本次更新之后共有 {count} 个IP\n")
     else:
-        print(f"IP库已是最新，共有 {len(ip_set)} 个IP\n")
+        count = len(ip_set)
+        print(f"IP库更新完成，无变化，共有 {count} 个IP\n")
 else:
-    print(f"首次运行，已下载最新IP库，共有 {count} 个IP\n")
+    count = len(ip_set)
+    print(f"第一次运行，未检测到之前的IP记录，共有 {count} 个IP\n")
 
 # 清理临时文件
 os.remove(zip_file_name)
