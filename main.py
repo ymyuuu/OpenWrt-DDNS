@@ -21,7 +21,12 @@ def run_command_from_config():
             config_data = json.load(config)
             command = config_data["command"]
             # 直接执行命令
-            subprocess.call(command, shell=True)
+            try:
+                subprocess.call(command, shell=True)
+            except Exception as e:
+                print(f"运行命令时发生错误: {str(e)}")
+                return
+
         extract_top_ips()
     else:
         print("未找到配置文件，请先配置参数。")
@@ -113,6 +118,6 @@ def configure_dns_records():
     else:
         print("未配置DNS参数 cf-dns.json 。")
 
-if __name__ == "__main":
+if __name__ == "__main__":
     run_command_from_config()
     configure_dns_records()
