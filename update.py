@@ -12,6 +12,9 @@ download_url = "https://ymy.gay/https://zip.baipiao.eu.org"
 zip_file_name = os.path.join(script_dir, "data.zip")
 ip_txt_file_name = os.path.join(script_dir, "ip.txt")
 
+# 判断是否是第一次运行
+is_first_run = not os.path.exists(ip_txt_file_name)
+
 # 记录脚本运行的时间
 start_time = datetime.now()
 
@@ -41,7 +44,7 @@ for root, _, files in os.walk(os.path.join(script_dir, "data_folder")):
 
 # 读取上次的IP记录
 old_ip_list = []
-if os.path.exists(ip_txt_file_name):
+if not is_first_run:
     with open(ip_txt_file_name, "r") as old_ip_file:
         for line in old_ip_file:
             line = line.strip()
@@ -60,22 +63,21 @@ with open(ip_txt_file_name, "w") as new_ip_file:
 # 输出更新信息
 end_time = datetime.now()
 start_time_str = start_time.strftime('%Y-%m-%d %H:%M')
-
-# 检查是否是第一次运行，如果是，则不输出变化信息
-if not os.path.exists(ip_txt_file_name) and (added_ips or removed_ips):
-    print(f"第一次运行，共有 {len(ip_set)} 个IP\n")
-elif added_ips or removed_ips:
-    if added_ips:
-        print("+")
-        for ip in sorted(added_ips, key=lambda x: [int(part) for part in x.split('.')]):
-            print(ip)
-    if removed_ips:
-        print("-")
-        for ip in sorted(removed_ips, key=lambda x: [int(part) for part in x.split('.')]):
-            print(ip)
-    print(f"本次更新之后共有 {len(ip_set)} 个IP\n")
+if not is_first_run:  # 只在不是第一次运行时输出变化信息
+    if added_ips or removed_ips:
+        if added_ips:
+            print("+")
+            for ip in sorted(added_ips, key=lambda x: [int(part) for part in x.split('.')]):
+                print(ip)
+        if removed_ips:
+            print("-")
+            for ip in sorted(removed_ips, key=lambda x: [int(part) for part in x.split('.')]):
+                print(ip)
+        print(f"本次更新之后共有 {len(ip_set)} 个IP\n")
+    else:
+        print(f"IP库更新完成，无变化，共有 {len(ip_set)} 个IP\n")
 else:
-    print(f"IP库更新完成，无变化，共有 {len(ip_set)} 个IP\n")
+    print(f"第一次运行，未检测到之前的IP记录，共有 {len(ip_set)} 个IP\n")
 
 # 清理临时文件
 os.remove(zip_file_name)
