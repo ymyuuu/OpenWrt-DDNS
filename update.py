@@ -60,18 +60,21 @@ with open(ip_txt_file_name, "w") as new_ip_file:
 # 输出更新信息
 end_time = datetime.now()
 start_time_str = start_time.strftime('%Y-%m-%d %H:%M')
-if os.path.exists(ip_txt_file_name) and (added_ips or removed_ips):
-    if added_ips:
-        print("+")
-        for ip in sorted(added_ips, key=lambda x: [int(part) for part in x.split('.')]):
-            print(ip)
-    if removed_ips:
-        print("-")
-        for ip in sorted(removed_ips, key=lambda x: [int(part) for part in x.split('.')]):
-            print(ip)
-    print(f"本次更新之后共有 {len(ip_set)} 个IP\n")
+if os.path.exists(ip_txt_file_name):  # 判断是否存在 ip.txt 文件
+    if added_ips or removed_ips:
+        if added_ips:
+            print("+")
+            for ip in sorted(added_ips, key=lambda x: [int(part) for part in x.split('.')]):
+                print(ip)
+        if removed_ips:
+            print("-")
+            for ip in sorted(removed_ips, key=lambda x: [int(part) for part in x.split('.')]):
+                print(ip)
+        print(f"本次更新之后共有 {len(ip_set)} 个IP\n")
+    else:
+        print(f"IP库更新完成，无变化，共有 {len(ip_set)} 个IP\n")
 else:
-    print(f"IP库更新完成，无变化，共有 {len(ip_set)} 个IP\n")
+    print(f"第一次运行，未检测到之前的IP记录，共有 {len(ip_set)} 个IP\n")
 
 # 清理临时文件
 os.remove(zip_file_name)
