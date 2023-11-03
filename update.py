@@ -60,7 +60,7 @@ with open(ip_txt_file_name, "w") as new_ip_file:
 # 输出更新信息
 end_time = datetime.now()
 start_time_str = start_time.strftime('%Y-%m-%d %H:%M')
-if added_ips or removed_ips:
+if os.path.exists(ip_txt_file_name) and (added_ips or removed_ips):
     if added_ips:
         print("+")
         for ip in sorted(added_ips, key=lambda x: [int(part) for part in x.split('.')]):
