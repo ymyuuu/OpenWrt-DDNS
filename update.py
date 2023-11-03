@@ -67,11 +67,11 @@ if os.path.exists(ip_txt_file_name):
             print("-")
             for ip in sorted(removed_ips, key=lambda x: [int(part) for part in x.split('.')]):
                 print(ip)
-        print(f"IP库更新完成之后共有 {len(ip_set)} 个IP\n")
+        print(f"本次更新之后共有 {len(ip_set)} 个IP\n")
     else:
         print(f"IP库更新完成，无变化，共有 {len(ip_set)} 个IP\n")
 else:
-    print(f"首次运行，已下载最新IP库，共有 {count} 个IP，后续运行会自动更新IP库\n")
+    print(f"第一次运行，未检测到之前的IP记录，共有 {len(ip_set)} 个IP\n")
 
 # 保存新的IP记录
 with open(ip_txt_file_name, "w") as new_ip_file:
