@@ -2,8 +2,7 @@
 
 本指南将介绍如何在 OpenWrt 上安装和配置优选反代IP或自定义测速 IP 的 DDNS（动态域名解析）服务。
 
-![圆角-WechatIMG2096](https://github.com/ymyuuu/OpenWrt-DDNS/assets/135582157/96bae327-9365-4ef2-85e5-09e6b29aef97)
-
+<img width="1430" alt="image" src="https://github.com/ymyuuu/OpenWrt-DDNS/assets/135582157/e6c8b068-88ab-41ab-be3a-fb028713a80f">
 
 ## 依赖
 
