@@ -9,8 +9,9 @@
 在开始安装之前，请确保已安装以下依赖：
 
 ```shell
-opkg update
-opkg install wget unzip python3 python3-pip && pip3 install requests
+opkg update &&
+opkg install wget unzip python3 python3-pip &&
+pip3 install requests
 
 ```
 
