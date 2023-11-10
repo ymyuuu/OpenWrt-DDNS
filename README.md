@@ -10,7 +10,7 @@
 
 ```shell
 opkg update
-opkg install wget unzip python3
+opkg install wget unzip python3 python3-pip && pip3 install requests
 
 ```
 
