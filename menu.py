@@ -58,7 +58,7 @@ def configure_parameters():
         # 如果用户选择进行DNS推送 (按回车)，继续询问DNS相关信息。
         api_token = input("请输入您的 Cloudflare API 令牌: ")
         zone_id = input("请输入您的区域ID: ")
-        record_name = input("请输入DNS记录名称 (默认为 '@'): ") or "@"
+        record_name = input("请输入DNS记录名称 (默认为 'ip'): ") or "ip"
         # 保存DNS信息到文件
         with open(dns_file, "w") as dns_config:
             dns_data = {
