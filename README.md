@@ -4,6 +4,12 @@
 
 <img width="1430" alt="image" src="https://github.com/ymyuuu/OpenWrt-DDNS/assets/135582157/bc9cd339-c598-4a94-b0ca-8ba882f46fdf">
 
+## 交流群和通知频道
+
+欢迎加入我们的交流群 [Preferred IP Push Chat](https://t.me/Preferred_IP_Push_Chat)
+
+同时，你可以关注我们的通知频道 [Preferred IP Push](https://t.me/Preferred_IP_Push)
+
 ## 依赖
 
 在开始安装之前，请确保已安装以下依赖：
