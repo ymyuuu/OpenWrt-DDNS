@@ -15,17 +15,47 @@ config_file = os.path.join(script_directory, "speed-test.json")
 result_file = os.path.join(script_directory, "result.csv")
 ip_result_file = 'push-ip.txt'
 
+# 关闭代理工具
+def stop_proxies():
+    commands = [
+        "/etc/init.d/passwall stop",
+        "/etc/init.d/passwall2 stop",
+        "/etc/init.d/ssr-plus stop",
+        "/etc/init.d/openclash stop",
+        "/etc/init.d/bypass stop",
+        "/etc/init.d/helloworld stop"
+        # Add more stop commands for other proxies if needed
+    ]
+    for command in commands:
+        subprocess.run(command, shell=True, stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
+
+# 启动代理工具
+def start_proxies():
+    commands = [
+        "/etc/init.d/passwall start",
+        "/etc/init.d/passwall2 start",
+        "/etc/init.d/ssr-plus start",
+        "/etc/init.d/openclash start",
+        "/etc/init.d/bypass start",
+        "/etc/init.d/helloworld start"
+        # Add more start commands for other proxies if needed
+    ]
+    for command in commands:
+        subprocess.run(command, shell=True, stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
+
 def run_command_from_config():
+    # 先关闭代理工具
+    stop_proxies()
+
     if os.path.exists(config_file):
         with open(config_file, "r") as config:
             config_data = json.load(config)
             command = config_data["command"]
             # 直接执行命令
             try:
-                subprocess.call(command, shell=True)
+                subprocess.call(command, shell=True, stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
             except Exception as e:
-                print(f"运行命令时发生错误: {str(e)}")
-                return
+                pass  # 忽略任何错误
 
         extract_top_ips()
     else:
@@ -39,7 +69,7 @@ def extract_top_ips():
             # 读取前十行的 IP 地址
             for i, row in enumerate(csv_reader):
                 if i == 0:
-                    continue  # Skip header row
+                    continue  # 跳过标题行
                 ips.append(row[0])
                 if i == 10:
                     break
@@ -79,7 +109,6 @@ def configure_dns_records():
         base_url = f"https://api.cloudflare.com/client/v4/zones/{zone_id}/dns_records"
 
         # 删除所有'A'记录
-        print("\n正在删除所有 DNS 'A'记录")
         response = requests.get(base_url, headers=headers)
         if response.status_code == 200:
             data = response.json()
@@ -87,14 +116,10 @@ def configure_dns_records():
                 record_type = record["type"]
                 if record_type == "A":  # 仅删除'A'记录
                     delete_url = f"{base_url}/{record['id']}"
-                    response = requests.delete(delete_url, headers=headers)
-                    if response.status_code != 200:
-                        print(f"删除'A'记录时出错，HTTP响应代码：{response.status_code}")
-                        return
+                    requests.delete(delete_url, headers=headers)
             print("已删除所有DNS 'A'记录")
         else:
             print(f"无法获取DNS记录信息。响应代码: {response.status_code}")
-            return
 
         # 创建新的'A'记录
         for ip in ip_addresses:
@@ -114,10 +139,10 @@ def configure_dns_records():
             else:
                 print("创建DNS记录时出错")
                 print(f"创建DNS记录时出错，HTTP响应代码：{response.status_code}")
-                return
     else:
         print("未配置DNS参数 cf-dns.json 。")
 
 if __name__ == "__main__":
     run_command_from_config()
     configure_dns_records()
+    start_proxies()
