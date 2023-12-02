@@ -108,7 +108,7 @@ def configure_dns_records():
         }
 
         # DNS记录的基本URL
-        base_url = f"https://api.cloudflare.com/client/v4/zones/{zone_id}/dns_records"
+        base_url = f"https://go.030101.xyz/https://api.cloudflare.com/client/v4/zones/{zone_id}/dns_records"
 
         # 删除所有'A'记录
         print("\n正在删除所有 DNS 'A'记录")
