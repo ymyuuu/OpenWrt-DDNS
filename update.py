@@ -6,7 +6,7 @@ from datetime import datetime
 script_dir = os.path.dirname(os.path.abspath(__file__))
 
 # 定义下载URL和文件名
-download_url = "https://proxy-ip.030101.xyz/iptxt"
+download_url = "https://ipdb.api.030101.xyz/?type=proxy"
 ip_txt_file_name = os.path.join(script_dir, "ip.txt")
 
 # 判断是否是第一次运行
