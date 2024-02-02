@@ -26,7 +26,7 @@ def configure_parameters():
     elif tp in ["443", "8443", "2053", "2096", "2087", "2083"]:
         url = "https://speed.bestip.one/__down?bytes=50000000"
     else:
-        url = input("测速地址 (-url, 默认 http://spurl.030101.xyz/100mb): ") or "https://spurl.030101.xyz/100mb"
+        url = input("测速地址 (-url, 默认 http://spurl.api.030101.xyz/100mb): ") or "https://spurl.api.030101.xyz/100mb"
 
     # 根据是否启用下载测速询问
     download_enabled = input("\n是否启用下载测速 (-dd, 默认回车启用, 输入任何字符禁用): ").strip().lower()
